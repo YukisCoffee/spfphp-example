@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SpfPhp Test</title>
+        <link href="/static/main.css" rel="stylesheet">
+    </head>
+    <body class="spf-link {{ page_class }}">
+        {% include "core/masthead.html.twig" %}
+        {% block content %}
+        <div id="content"></div>
+        {% endblock %}
+    </body>
+    {% include "core/foot_scripts.html.twig" %}
+</html>

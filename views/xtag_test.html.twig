@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<div id="content" x-spfphp-ignore-body="true">
+    This element (#content) uses an x-spfphp-ignore-body tag.
+</div>
+<div id="other-capture" x-spfphp-capture>
+    This element (#other-capture) uses an x-spfphp-capture tag.
+</div>
+<div id="yet-other-capture" class="hello" data-hello="hi" data-abc="def" x-spfphp-capture x-spfphp-listener-attributes="class, data-hello">
+    This element (#yet-other-capture) has a few attributes that it wants SpfPhp to update.
+</div>
+<div id="the-shy-one" class="hiiii" x-spfphp-capture x-spfphp-listener-attributes="class" x-spfphp-ignore-body>
+    This one only wants its attributes to be updated after a page change, but its body may be omitted.
+</div>
+<div id="direct-render-callback-container">
+    <h3>Here is a test of the direct render callback system:</h3>
+    <ul class="direct-render-callback-tests">
+        <!-- This should say "Hello world" -->
+        <li id="a" x-spfphp-capture x-spfphp-direct-render-callback="test">Body sent without SPF gets ignored.</li>
+        <!-- This should say "Hi" -->
+        <li id="b" x-spfphp-capture="true" x-spfphp-direct-render-callback="test" x-spfphp-test-string="Hi">You gotta request through SPF.</li>
+        {% if not demonslow %}
+            <!-- 
+                This directly renders a file from PHP.
+                Of course, ultimately these are only useful for optimising certain chunks of HTML
+                which may be too large for fast enough performance.
+
+                Here is an absurdly huge example.
+            -->
+            <li id="direct-render-test" x-spfphp-capture x-spfphp-direct-render-callback="direct_render_test">:)</li>
+            <a href="/xtag_test?slow=true" class="spf-link">Don't believe me? Here.</a>
+        {% else %}
+            <!-- 
+                You asked for it >:)
+                
+                And just for fair performance reasons, the same function is used to retrieve the contents, so this should
+                have no effect on Twig speeds (for a similar reason as to why the above is much faster)
+            -->
+            <li id="direct-render-test" x-spfphp-capture>{{ slowTest() }}</li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}

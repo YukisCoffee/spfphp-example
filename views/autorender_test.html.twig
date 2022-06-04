@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html x-spfphp-trolled-this-tag-does-not-even-exist-but-it-gets-removed-in-fact-all x-spfphp-tags-get-removed-including-this-new-one-muahahahahahahahahha>
+    <head>
+        <title>Autorender test</title>
+        <link href="/static/main.css" rel="stylesheet">
+    </head>
+    <body class="spf-link {{ page_class }}" x-spfphp-capture x-spfphp-ignore-body x-spfphp-listener-attributes="class">
+        {% include "core/masthead.html.twig" %}
+        {% block content %}
+        <div id="content" x-spfphp-capture>
+            Welcome to the autocapture test. This page simply relies on x-tags to dictate all behaviour.
+            
+            <h3 class="title" x-spfphp-capture x-spfphp-ignore-body x-spfphp-listener-attributes="class">Some facts about autorendering:</h3>
+            <ul id="facts">
+                <li id="fact-a" class="red" data-colour="red" x-spfphp-capture x-spfphp-listener-attributes="class, data-colour">
+                    Autorendering saves the developer the time of having to interface with the SpfPhp API.
+                    All they simply must do is assign a few extra attributes to their elements and the
+                    library will automatically handle them.
+                </li>
+                <!-- The removal of the space before the comma and the missing attribute are intentional -->
+                <li id="fact-b" class="blue" data-colour="blue" x-spfphp-capture x-spfphp-listener-attributes="class,data-colour,    other-fake-attribute">
+                    SpfPhp autorendering makes it super easy to integrate the library with pre-existing code. All
+                    that must be done is simply changing a few attributes on elements.
+                </li>
+                <li id="fact-c" class="green" data-colour="yellow" x-spfphp-capture x-spfphp-listener-attributes="class, data-colour">
+                    When rendering standard HTML, all x-tags will be automatically removed.
+                </li>
+                <li id="fact-c" class="wtf" data-colour="" x-spfphp-capture x-spfphp-listener-attributes="class, data-colour">
+                    And finally... This page is not not even valid for SPF.js. Definitions should not nest, and the attempt
+                    to nest definitions in SpfPhp causes problems as output will retain the nested attributes through SPF.
+                    The nesting done here was to test the removal in HTML only.
+                </li>
+            </ul>
+        </div>
+        {% endblock %}
+    </body>
+    {% include "core/foot_scripts.html.twig" %}
+</html>
